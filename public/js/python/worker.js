@@ -12,7 +12,7 @@
 //   página -> worker: init, run-editor, run-repl, run-tests, run-snippet
 //   worker -> página: ready, load-error, out, input-request, done
 
-import { loadPyodide } from '/vendor/pyodide/pyodide.mjs';
+import { loadPyodide } from '../../vendor/pyodide/pyodide.mjs';
 
 let pyodide = null;
 let ctrl = null;      // Int32Array compartido: [estado, longitud] para input()
@@ -307,7 +307,7 @@ async function init(msg) {
   }
   try {
     pyodide = await loadPyodide({
-      indexURL: '/vendor/pyodide/',
+      indexURL: new URL('../../vendor/pyodide/', import.meta.url).href,
       stdout: (t) => write('out', t + '\n'),
       stderr: (t) => write('err', t + '\n'),
     });

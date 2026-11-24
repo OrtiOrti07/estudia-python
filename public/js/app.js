@@ -123,6 +123,8 @@ function setupWorkspaceToggle() {
 }
 
 async function start() {
+  // En GitHub Pages, espera a que el service worker active el aislamiento (ver js/coi.js).
+  if (window.coiPending) await window.coiPending;
   requestPersistence();
   state.runner = new PythonRunner();
   state.workspace = new Workspace(document.getElementById('workspace'), state.runner);

@@ -159,7 +159,7 @@ function loadMammoth() {
   if (!mammothPromise) {
     mammothPromise = new Promise((resolve, reject) => {
       const s = document.createElement('script');
-      s.src = '/vendor/mammoth/mammoth.browser.min.js';
+      s.src = new URL('../vendor/mammoth/mammoth.browser.min.js', import.meta.url).href;
       s.onload = () => resolve(window.mammoth);
       s.onerror = () => reject(new Error('No se pudo cargar el lector de DOCX'));
       document.head.appendChild(s);
@@ -207,8 +207,8 @@ async function parseDocx(file) {
 let pdfjsPromise = null;
 async function loadPdfjs() {
   if (!pdfjsPromise) {
-    pdfjsPromise = import('/vendor/pdfjs/build/pdf.min.mjs').then((pdfjs) => {
-      pdfjs.GlobalWorkerOptions.workerSrc = '/vendor/pdfjs/build/pdf.worker.min.mjs';
+    pdfjsPromise = import('../vendor/pdfjs/build/pdf.min.mjs').then((pdfjs) => {
+      pdfjs.GlobalWorkerOptions.workerSrc = new URL('../vendor/pdfjs/build/pdf.worker.min.mjs', import.meta.url).href;
       return pdfjs;
     });
   }
@@ -260,9 +260,9 @@ async function parsePdf(file) {
   try {
     doc = await pdfjs.getDocument({
       data: new Uint8Array(await file.arrayBuffer()),
-      cMapUrl: '/vendor/pdfjs/cmaps/',
+      cMapUrl: new URL('../vendor/pdfjs/cmaps/', import.meta.url).href,
       cMapPacked: true,
-      standardFontDataUrl: '/vendor/pdfjs/standard_fonts/',
+      standardFontDataUrl: new URL('../vendor/pdfjs/standard_fonts/', import.meta.url).href,
       isEvalSupported: false,
       disableFontFace: true,
       useSystemFonts: false,

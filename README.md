@@ -26,6 +26,22 @@ Abre <http://127.0.0.1:8000> en Chrome, Edge o Firefox. Para cerrarla, pulsa `Ct
 > Abre siempre la misma dirección (`127.0.0.1:8000`). El navegador guarda tus datos por dirección,
 > así que `localhost:8000` tendría un almacenamiento distinto.
 
+## En línea (GitHub Pages)
+
+La misma aplicación se publica automáticamente en GitHub Pages con cada `git push` a `main`
+(flujo `.github/workflows/pages.yml`), así que puedes estudiar desde cualquier PC sin instalar nada:
+
+<https://ortiorti07.github.io/estudia-python/>
+
+- La primera vez la página se recarga sola una vez: está activando el service worker (`sw.js`) que
+  añade las cabeceras de seguridad que GitHub Pages no permite configurar.
+- Tus documentos y tu progreso se guardan **en el navegador de cada equipo**, igual que en local.
+  No se suben a GitHub ni se comparten entre PCs: en otro equipo tendrás que volver a importarlos.
+- La dirección es pública: cualquiera que la tenga puede abrir la aplicación (vacía), pero nunca
+  ve tus materiales ni tu progreso.
+- Para probar la versión publicada en local: `npm install`, después `node scripts/build-pages.mjs`
+  y sirve la carpeta `_site/` con cualquier servidor estático.
+
 ## Qué incluye
 
 | Sección | Qué puedes hacer |
@@ -65,6 +81,8 @@ Abre <http://127.0.0.1:8000> en Chrome, Edge o Firefox. Para cerrarla, pulsa `Ct
 - El servidor (`server.mjs`) escucha solo en `127.0.0.1` y envía una política de seguridad (CSP)
   que impide que la página o el código Python se conecten a otros servidores. Además, el código del
   usuario no puede importar los puentes con JavaScript (`js`, `pyodide`).
+- En GitHub Pages, esas mismas cabeceras (aislamiento COOP/COEP y CSP) las añade el service worker
+  `sw.js` a cada respuesta del propio sitio. No guarda caché ni toca peticiones a otros dominios.
 
 ## Decisiones técnicas
 
@@ -81,8 +99,12 @@ Abre <http://127.0.0.1:8000> en Chrome, Edge o Firefox. Para cerrarla, pulsa `Ct
 ```
 server.mjs                 servidor local (cabeceras de seguridad, sirve public/ y bibliotecas)
 iniciar.bat                arranque con doble clic en Windows
+scripts/build-pages.mjs    prepara _site/ para GitHub Pages (public/ + bibliotecas)
+.github/workflows/pages.yml  publica en GitHub Pages en cada push a main
 public/
   index.html, css/styles.css
+  sw.js                    service worker para GitHub Pages (cabeceras de seguridad)
+  js/coi.js                registra sw.js si hace falta (no hace nada en local)
   js/app.js                arranque y navegación (#/materiales, #/temas, #/ejercicios, #/codigo)
   js/state.js              estado compartido (materiales, índice, ejercicios)
   js/store.js              almacenamiento local
