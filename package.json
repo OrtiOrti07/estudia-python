@@ -1,0 +1,15 @@
+{
+  "name": "estudia-python",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Entorno de estudio de Python en español: materiales propios, ruta para principiantes, ejercicios y consola local (Pyodide).",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "mammoth": "1.13.0",
+    "pdfjs-dist": "6.5.438",
+    "pyodide": "314.0.8"
+  }
+}

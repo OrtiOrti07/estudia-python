@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Estudia Python</title>
+  <meta name="description" content="Entorno de estudio de Python en español con tus propios materiales, ejercicios y una consola.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+  <header class="topbar">
+    <a class="brand" href="#/" aria-label="Estudia Python, inicio">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="15" height="15" rx="4" fill="var(--py-blue)"/><rect x="14" y="14" width="15" height="15" rx="4" fill="var(--py-yellow)"/><circle cx="8" cy="8" r="1.8" fill="#fff"/><circle cx="24" cy="24" r="1.8" fill="#333"/></svg>
+      <span>Estudia Python</span>
+    </a>
+    <nav class="mainnav" aria-label="Secciones">
+      <a href="#/materiales" data-nav="materiales">Materiales</a>
+      <a href="#/temas" data-nav="temas">Temas</a>
+      <a href="#/ejercicios" data-nav="ejercicios">Ejercicios</a>
+      <a href="#/codigo" data-nav="codigo">Código</a>
+    </nav>
+    <div class="top-right">
+      <span id="py-status" class="py-status" role="status">Cargando Python…</span>
+      <button id="toggle-ws" class="btn btn-small" type="button" aria-pressed="true" aria-controls="workspace">Panel de código</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main id="main" tabindex="-1"></main>
+    <aside id="workspace" class="workspace" aria-label="Editor y consola de Python"></aside>
+  </div>
+
+  <nav class="bottomnav" aria-label="Secciones">
+    <a href="#/materiales" data-nav="materiales"><span aria-hidden="true">📚</span>Materiales</a>
+    <a href="#/temas" data-nav="temas"><span aria-hidden="true">🧭</span>Temas</a>
+    <a href="#/ejercicios" data-nav="ejercicios"><span aria-hidden="true">✏️</span>Ejercicios</a>
+    <a href="#/codigo" data-nav="codigo"><span aria-hidden="true">▶</span>Código</a>
+  </nav>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <noscript><p class="noscript">Esta aplicación necesita JavaScript activado.</p></noscript>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
